@@ -1,0 +1,245 @@
+:root {
+    --color-dark: #11052C;
+    --color-dark-bule: #242841;
+    --color-bule: #434764;
+    --color-right-green: #A5F1E9;
+    --color-red : #FF4949;
+    --color-gray: #D5D5D5;
+    --color-white: #fff;
+    --color-yellow: #FDFF00;
+    --color-transparent: transparent;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+ul {
+    margin: 0;
+    padding: 0 30px;
+    list-style: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-dark-bule);
+    color: var(--color-white);
+}
+
+section {
+    margin: 200px auto;
+    box-shadow: 3px 3px 40px #11052C;
+    width: 400px;
+    height: 500px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* tap content : stop watch */
+
+.stop-watch-time {
+    margin: 0;
+    padding: 30px;
+    font-size: 4rem;
+    font-weight: 100;
+    color: var(--color-yellow);
+}
+
+.stop-watch-time span {
+    font-weight: 900;
+    padding: 0 1.25rem;
+}
+
+.stop-watch-time span.milliseconds {
+    color: var(--color-gray);
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.stop-watch-btns {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+}
+
+.stop-watch-btns button {
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--color-transparent);
+    color: var(--color-gray);
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: 700;
+}
+
+.stop-watch-btns button:nth-child(2) {
+    color: var(--color-red);
+
+}
+
+.stop-watch-btns button:hover {
+    background-color: #11052C;
+}
+
+.stop-watch-btns button.active {
+    background-color: var(--color-yellow);
+    color: var(--color-dark-bule);
+}
+.stop-watch-btns button.stop {
+    background-color: var(--color-red);
+    color: var(--color-dark-bule);
+}
+
+.stop-watch .rap-lists {margin-bottom: 50px;}
+
+.stop-watch .rap-lists .rap-list {
+    text-align: left;
+    background-color: var(--color-bule);
+    padding: 0.5rem 1rem;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stop-watch .rap-lists .rap-list .close-icon {
+    width: 10px;
+    fill: var(--color-yellow);
+    cursor: pointer;
+}
+
+
+/* tap content : timer */
+.timer {padding: 1px;}
+
+.timer-line {
+    margin: 30px 0;
+    transform: translateX(50%);
+    width: 200px;
+    height: 200px;
+    border: 5px solid var(--color-bule);
+    border-radius: 50%;
+}
+
+.timer-time {
+    font-size: 4rem;
+    font-weight: 100;
+    color: var(--color-yellow);
+}
+
+.timer-end {
+    padding: 4rem 0;
+    color: var(--color-yellow);
+}
+
+.timer-setting {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.timer-setting .timer-setting-btn {position: relative;}
+
+.timer-setting .timer-setting-btn button {
+    position: absolute;
+    color: var(--color-yellow);
+    top: 14px;
+    border: none;
+    background-color: var(--color-transparent);
+    transition: 0.2s;
+}
+
+.timer-setting .timer-setting-btn button.left {left: -25px;}
+.timer-setting .timer-setting-btn button.right {right: -25px;}
+.timer-setting .timer-setting-btn button:hover {opacity: 0.7;}
+
+.timer-setting .timer-setting-btn .view {
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+.timer-setting .timer-setting-btn p {
+    color: var(--color-bule);
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.timer-btns {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.timer-btns button {
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--color-transparent);
+    color: var(--color-gray);
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: 700;
+    margin: 0 0.5rem;
+}
+
+.timer-btns button:nth-child(2) {
+    color: var(--color-red);
+
+}
+
+.timer-btns button:hover {
+    background-color: #11052C;
+}
+
+.timer-btns button.active {
+    background-color: var(--color-yellow);
+    color: var(--color-dark-bule);
+}
+
+.hidden {display: none;}
+
+
+/* tap button */
+.tap-btns {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tap-btns button {
+    border: none;
+    background-color: var(--color-dark);
+    padding: 0.75rem;
+    cursor: pointer;
+    color: var(--color-right-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.tap-btns button svg {
+    fill: var(--color-right-green);
+}
+
+.tap-btns button svg.stop-watch-icon {width: 20px;}
+
+.tap-btns button svg.timer-icon {width: 17px;}
+
+.tap-btns button span {
+    margin-left: 12px;
+    font-size: 0.75rem;
+    color: var(--color-gray);
+}
+
+.tap-btns .click-btn {
+    background-color: var(--color-dark-bule);
+}
