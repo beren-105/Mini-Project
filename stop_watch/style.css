@@ -1,245 +1,227 @@
-:root {
-    --color-dark: #11052C;
-    --color-dark-bule: #242841;
-    --color-bule: #434764;
-    --color-right-green: #A5F1E9;
-    --color-red : #FF4949;
-    --color-gray: #D5D5D5;
-    --color-white: #fff;
-    --color-yellow: #FDFF00;
-    --color-transparent: transparent;
+
+// tap 버튼 이벤트
+const tapBtn = document.querySelectorAll('.tap')
+const tapCont = document.querySelectorAll('.tapcon')
+
+tapBtn.forEach((tapBtns)=> {
+    tapBtns.addEventListener('click', (e)=> {
+        let id = e.currentTarget.dataset.id
+        if (id) {
+            for (let btns of tapBtn) {
+                btns.classList.remove('click-btn')
+            }
+            e.currentTarget.classList.add('click-btn')
+
+            for (let conts of tapCont) {
+                conts.classList.add('hidden')
+            }
+            let tapcont = document.getElementById(id)
+            tapcont.classList.remove('hidden')
+        }
+    })
+})
+
+
+
+//스톱워치 이벤트
+let mins = 0
+let seconds = 0
+let milliseconds = 0
+
+let time = 0
+let index = 0
+let interval
+
+const startBtn = document.querySelector('.stop-watch-start')
+const resetBtn = document.querySelector('#stop-watch-reset')
+const rapBtn = document.querySelector('.stop-watch-rap')
+const h1 = document.querySelector('.stop-watch-time')
+
+
+// start 버튼 이벤트
+let click = true /* 중지 될 수 있기때문에 넣음 */
+
+startBtn.addEventListener('click', ()=> {
+    startBtn.innerText = 'START'
+    
+    if (click) {
+        startBtn.classList.add('stop')
+        startBtn.innerText = 'STOP'
+        interval = setInterval(startWatch, 10);
+        click = false
+    } else if (!click) {
+        clearInterval(interval)
+        startBtn.innerText = 'START'
+        startBtn.classList.remove('stop')
+        startBtn.classList.add('active')
+        click = true
+    }
+})
+
+
+// reset 버튼 이벤트
+resetBtn.addEventListener('click', ()=> {
+    clearInterval(interval)
+    mins = 0
+    seconds = 0
+    milliseconds = 0
+    
+    h1.innerHTML = `
+    <span>00</span>:<span>00</span>:<span class="milliseconds">00</span>
+    `
+    console.log(click)
+    if (click) {
+        startBtn.classList.remove('active')
+    } else if (!click) {
+        startBtn.innerText = 'START'
+        startBtn.classList.remove('stop')
+    }
+    click = true
+
+    const li = document.querySelectorAll('.rap-list')
+    li.forEach((lis)=> {
+        lis.remove()
+    })
+})
+
+
+// rap 버튼 이벤트
+rapBtn.addEventListener('click', (e)=> {
+
+    if (index < 5) {
+        index++
+
+        // rap 생성
+        const ul = document.querySelector('.rap-lists')
+        const li = document.createElement('li')
+        li.classList.add('rap-list')
+        li.innerHTML = `
+            <span>${(mins < 10 ? "0" + mins : mins) + ':' + (seconds < 10 ? "0" + seconds : seconds) + ':' + (milliseconds < 10 ? "0" + milliseconds : milliseconds)}</span>
+            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
+        `
+        ul.prepend(li)
+
+        // rap 제거
+        const closeBtn = document.querySelector('.close-icon')
+        closeBtn.addEventListener('click', (e)=> {
+            index--
+            if (e.currentTarget === closeBtn) {
+                e.currentTarget.parentNode.remove()
+            }
+        })
+    } else {
+        e.preventDefault()
+    }
+})
+
+
+// 시간 계산
+function startWatch() {
+    milliseconds++
+    
+    if (milliseconds >= 100) {
+        milliseconds = 0
+        seconds++
+    }
+    if (seconds >= 60) {
+        seconds = 0
+        mins++
+    }
+
+    h1.innerHTML = `
+    <span>${mins < 10 ? "0" + mins : mins}</span>:<span>${seconds < 10 ? "0" + seconds : seconds}</span>:<span class="milliseconds">${milliseconds < 10 ? "0" + milliseconds : milliseconds}</span>
+    `
 }
 
-* {
-    box-sizing: border-box;
-}
-
-ul {
-    margin: 0;
-    padding: 0 30px;
-    list-style: none;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--color-dark-bule);
-    color: var(--color-white);
-}
-
-section {
-    margin: 200px auto;
-    box-shadow: 3px 3px 40px #11052C;
-    width: 400px;
-    height: 500px;
-    text-align: center;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-}
 
 
-/* tap content : stop watch */
+// 타이머 이벤트
 
-.stop-watch-time {
-    margin: 0;
-    padding: 30px;
-    font-size: 4rem;
-    font-weight: 100;
-    color: var(--color-yellow);
-}
+// 시간 설정
+const timerMinsBtn = document.querySelector('.timer-mins')
+const timerSeconds = document.querySelector('.timer-seconds')
+let mIndex = 1
+let sIndex = 1
 
-.stop-watch-time span {
-    font-weight: 900;
-    padding: 0 1.25rem;
-}
+timerMinsBtn.addEventListener('click', (e) => {
+    const left = document.querySelector('.timer-mins-left')
+    const right = document.querySelector('.timer-mins-right')
+    const view = document.querySelector('.timer-mins-view')
 
-.stop-watch-time span.milliseconds {
-    color: var(--color-gray);
-    font-size: 3rem;
-    font-weight: 700;
-}
+    if (e.target === right) {
+        mIndex++
+    } else if (e.target === left) {
+        mIndex--
+    }
 
-.stop-watch-btns {
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 30px;
-}
+    mIndex < 1 ? left.classList.add('hidden') : left.classList.remove('hidden')
+    mIndex > 9 ? right.classList.add('hidden') : right.classList.remove('hidden')
 
-.stop-watch-btns button {
-    border: none;
-    border-radius: 20px;
-    padding: 0.5rem 1.5rem;
-    background-color: var(--color-transparent);
-    color: var(--color-gray);
-    cursor: pointer;
-    transition: 0.5s;
-    font-weight: 700;
-}
+    view.innerText = mIndex
+})
 
-.stop-watch-btns button:nth-child(2) {
-    color: var(--color-red);
+timerSeconds.addEventListener('click', (e) => {
+    const left = document.querySelector('.timer-seconds-left')
+    const right = document.querySelector('.timer-seconds-right')
+    const view = document.querySelector('.timer-seconds-view')
 
-}
+    if (e.target === right) {
+        sIndex++
+    } else if (e.target === left) {
+        sIndex--
+    }
 
-.stop-watch-btns button:hover {
-    background-color: #11052C;
-}
+    sIndex < 1 ? left.classList.add('hidden') : left.classList.remove('hidden')
+    sIndex > 58 ? right.classList.add('hidden') : right.classList.remove('hidden')
+   
+    view.innerText = sIndex
+})
 
-.stop-watch-btns button.active {
-    background-color: var(--color-yellow);
-    color: var(--color-dark-bule);
-}
-.stop-watch-btns button.stop {
-    background-color: var(--color-red);
-    color: var(--color-dark-bule);
-}
+// 타이머 시작 이벤트
+const timerStart = document.querySelector('.timer-start')
+const timerTime = document.querySelector('.timer-time')
+const timerReset = document.querySelector('.timer-reset')
+const timerEnd = document.querySelector('.timer-end')
 
-.stop-watch .rap-lists {margin-bottom: 50px;}
+let state = true
+let timerInterval
+let totalTime
 
-.stop-watch .rap-lists .rap-list {
-    text-align: left;
-    background-color: var(--color-bule);
-    padding: 0.5rem 1rem;
-    margin: 10px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+timerStart.addEventListener('click', (e) => {
+    totalTime = mIndex*60 + sIndex
+    if (state === true) {
+        timerInterval = setInterval(timer, 1000)
+        timerStart.classList.add('active')
+    }
+})
 
-.stop-watch .rap-lists .rap-list .close-icon {
-    width: 10px;
-    fill: var(--color-yellow);
-    cursor: pointer;
+
+// 시간 감소
+function timer(e) {
+    let mTimer = Math.floor(totalTime/60)
+    let sTimer = totalTime%60
+    totalTime--
+    console.log(totalTime)
+
+    if (totalTime < 0) {
+        timerTime.classList.add('hidden')
+        timerEnd.classList.remove('hidden')
+        timerStart.classList.remove('active')
+        clearInterval(timerInterval)
+        state = false
+    }
+
+    timerTime.innerText = `${mTimer > 9 ? mTimer : '0' + mTimer}:${sTimer > 9 ? sTimer : '0' + sTimer}`
 }
 
 
-/* tap content : timer */
-.timer {padding: 1px;}
+// 리셋 버튼
+timerReset.addEventListener('click', (e)=> {
+    clearInterval(timerInterval)
+    state = true
+    timerTime.innerText = '00:00'
+    timerStart.classList.remove('active')
+    timerTime.classList.remove('hidden')
+    timerEnd.classList.add('hidden')
 
-.timer-line {
-    margin: 30px 0;
-    transform: translateX(50%);
-    width: 200px;
-    height: 200px;
-    border: 5px solid var(--color-bule);
-    border-radius: 50%;
-}
-
-.timer-time {
-    font-size: 4rem;
-    font-weight: 100;
-    color: var(--color-yellow);
-}
-
-.timer-end {
-    padding: 4rem 0;
-    color: var(--color-yellow);
-}
-
-.timer-setting {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.timer-setting .timer-setting-btn {position: relative;}
-
-.timer-setting .timer-setting-btn button {
-    position: absolute;
-    color: var(--color-yellow);
-    top: 14px;
-    border: none;
-    background-color: var(--color-transparent);
-    transition: 0.2s;
-}
-
-.timer-setting .timer-setting-btn button.left {left: -25px;}
-.timer-setting .timer-setting-btn button.right {right: -25px;}
-.timer-setting .timer-setting-btn button:hover {opacity: 0.7;}
-
-.timer-setting .timer-setting-btn .view {
-    font-size: 2rem;
-    font-weight: 100;
-}
-
-.timer-setting .timer-setting-btn p {
-    color: var(--color-bule);
-    font-weight: 800;
-    margin-bottom: 40px;
-}
-
-.timer-btns {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.timer-btns button {
-    border: none;
-    border-radius: 20px;
-    padding: 0.5rem 1.5rem;
-    background-color: var(--color-transparent);
-    color: var(--color-gray);
-    cursor: pointer;
-    transition: 0.5s;
-    font-weight: 700;
-    margin: 0 0.5rem;
-}
-
-.timer-btns button:nth-child(2) {
-    color: var(--color-red);
-
-}
-
-.timer-btns button:hover {
-    background-color: #11052C;
-}
-
-.timer-btns button.active {
-    background-color: var(--color-yellow);
-    color: var(--color-dark-bule);
-}
-
-.hidden {display: none;}
-
-
-/* tap button */
-.tap-btns {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-.tap-btns button {
-    border: none;
-    background-color: var(--color-dark);
-    padding: 0.75rem;
-    cursor: pointer;
-    color: var(--color-right-green);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.tap-btns button svg {
-    fill: var(--color-right-green);
-}
-
-.tap-btns button svg.stop-watch-icon {width: 20px;}
-
-.tap-btns button svg.timer-icon {width: 17px;}
-
-.tap-btns button span {
-    margin-left: 12px;
-    font-size: 0.75rem;
-    color: var(--color-gray);
-}
-
-.tap-btns .click-btn {
-    background-color: var(--color-dark-bule);
-}
+})
