@@ -39,17 +39,19 @@ const h1 = document.querySelector('.stop-watch-time')
 
 
 // start 버튼 이벤트
-let click = true /* 중지 될 수 있기때문에 넣음 */
+let click = true
 
 startBtn.addEventListener('click', ()=> {
+    startBtn.innerText = 'START'
+    
     if (click) {
         startBtn.classList.add('stop')
-        startBtn.firstElementChild.innerText = 'STOP'
+        startBtn.innerText = 'STOP'
         interval = setInterval(startWatch, 10);
         click = false
     } else if (!click) {
         clearInterval(interval)
-        startBtn.firstElementChild.innerText = 'START'
+        startBtn.innerText = 'START'
         startBtn.classList.remove('stop')
         startBtn.classList.add('active')
         click = true
@@ -67,11 +69,11 @@ resetBtn.addEventListener('click', ()=> {
     h1.innerHTML = `
     <span>00</span>:<span>00</span>:<span class="milliseconds">00</span>
     `
-
+    
     if (click) {
         startBtn.classList.remove('active')
     } else if (!click) {
-        startBtn.firstElementChild.innerText = 'START'
+        startBtn.innerText = 'START'
         startBtn.classList.remove('stop')
     }
     click = true
