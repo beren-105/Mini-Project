@@ -23,7 +23,7 @@ function App() {
 
 function FliterBtn(props) {
   return (
-    <div className="border">
+    <div className="">
     {category.map((categorys, i) => (
       <button className="p-2 bg-gray-200 m-2" key={i}>{categorys}</button>
     ))}
