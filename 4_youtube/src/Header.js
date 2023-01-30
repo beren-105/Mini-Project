@@ -26,7 +26,7 @@ function Header(props) {
     }
     
     return (
-        <header className="sticky top-0 left-0 z-10 bg-white dark:bg-black">
+        <header className="sticky top-0 left-0 z-10 bg-white">
             {/* 로고, 검색, 로그인창 */}
             <nav className="flex items-center justify-between justify-items-stretch h-14">
 
