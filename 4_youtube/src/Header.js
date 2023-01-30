@@ -3,10 +3,30 @@ import React, { useState } from "react"
 // 헤더
 function Header(props) {
     const category = props.category
-    const [setting, setsettion] = useState(false)
+    const [openSettion, setOpenSettion] = useState(false)
+    const [mode, setMode] = useState(false)
 
+    function settingClick(openSettion) {
+        setOpenSettion(!openSettion)
+
+        if (openSettion === false) {
+            setMode(false)
+        }
+    }
+
+    // 모드창 열기
+    function OpenMode(modeStatus) {
+        setMode(!modeStatus)
+    }
+
+    // 모드 뒤로가기 버튼
+    function modeBack() {
+        setOpenSettion(true)
+        setMode(false)
+    }
+    
     return (
-        <header className="sticky top-0 left-0 z-10 bg-white">
+        <header className="sticky top-0 left-0 z-10 bg-white dark:bg-black">
             {/* 로고, 검색, 로그인창 */}
             <nav className="flex items-center justify-between justify-items-stretch h-14">
 
@@ -36,12 +56,21 @@ function Header(props) {
                 <div className="flex items-center">
                     {/* 설정 */}
                     <div className="relative">
-                        <button onClick={() => setsettion(!setting)}>
+                        <button onClick={() => settingClick(openSettion)}>
                             <svg className="w-10 p-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12,16.5c0.83,0,1.5,0.67,1.5,1.5s-0.67,1.5-1.5,1.5s-1.5-0.67-1.5-1.5S11.17,16.5,12,16.5z M10.5,12 c0,0.83,0.67,1.5,1.5,1.5s1.5-0.67,1.5-1.5s-0.67-1.5-1.5-1.5S10.5,11.17,10.5,12z M10.5,6c0,0.83,0.67,1.5,1.5,1.5 s1.5-0.67,1.5-1.5S12.83,4.5,12,4.5S10.5,5.17,10.5,6z"></path></g></svg>
                         </button>
                         <Setting
-                            setting={setting}
-                        />
+                            openSettion={openSettion}
+                            mode={mode}
+                            openMode={OpenMode}
+                        >
+                            
+                        </Setting>
+                        <DarkMode
+                            openSettion={openSettion}
+                            mode={mode}
+                            modeBack={modeBack}
+                            />
                     </div>
                     {/* 로그인 */}
                     <button className="w-22 border rounded-full px-1 mr-4">
@@ -78,76 +107,62 @@ function Header(props) {
 
 // 설정 버튼
 function Setting(props) {
-    const setting = props.setting
-    
-    const [mode, setMode] = useState(false)
-
+    const openSettion = props.openSettion
     return (
         <>
-        {setting ?
+        {openSettion ?
             <div className="w-72 py-2 absolute botton-0 right-0 bg-white text-left rounded-xl shadow-2xl z-20">
                 <ul>
                     <li><a className="block p-4 border-b" href="#">YouTube의 내 데이터</a></li>
-                    <li className="flex justify-between" onClick={() => setMode(!mode)}>
+                    <li className="flex justify-between" onClick={() => props.openMode(props.mode)}>
                         <a className="block p-4" href="#">디자인: 기기테마</a>
                         <svg className="w-10 p-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g mirror-in-rtl=""><path d="M9.4,18.4l-0.7-0.7l5.6-5.6L8.6,6.4l0.7-0.7l6.4,6.4L9.4,18.4z"></path></g></svg>
                     </li>
                 </ul>
             </div>
         : null}
-        <DarkMode
-            mode={mode}
-            setting={setting}
-        />
+        
         </>
     )
 }
 
 // 다크/라이트 모드 선택
 function DarkMode(props) {
-    const setting = props.setting
+    const openSettion = props.openSettion
     const mode = props.mode
-
-    console.log(setting + ' setting')
-    console.log(mode + ' mode')
-    
-    function closeMode() {
-        
-    }
-
     return (
         <>
-        {setting && mode ?
-            <div className="w-72 absolute botton-0 right-0 bg-white text-left rounded-xl shadow-2xl z-20 overflow-hidden">
-                <div className="flex items-center p-2 border-b">
-                    <button className="hover:bg-gray-200 rounded-full transition mr-2" onClick={closeMode}>
-                        <svg className="w-10 p-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g mirror-in-rtl=""><path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path></g></svg>
-                    </button>
-                    <h4>디자인</h4>
+            {openSettion && mode ?
+                <div className="w-72 absolute botton-0 right-0 bg-white text-left rounded-xl shadow-2xl z-20 overflow-hidden">
+                    <div className="flex items-center p-2 border-b">
+                        <button className="hover:bg-gray-200 rounded-full transition mr-2" onClick={() => props.modeBack()}>
+                            <svg className="w-10 p-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g mirror-in-rtl=""><path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path></g></svg>
+                        </button>
+                        <h4>디자인</h4>
+                    </div>
+                    <p className="text-xs text-gray-400 p-4 pb-2">
+                        이 브라우저에만 설정이 적용됩니다.
+                        </p>
+                    <div>
+                        <label className="flex items-center px-2 my-2 hover:bg-gray-200">
+                        <svg className="w-10 p-2 mr-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
+                        <input
+                            className="hidden"
+                            type='checkbox'
+                            />
+                            <span>어두운 테마</span>
+                        </label>
+                        <label className="flex items-center px-2 my-2 hover:bg-gray-200">
+                        <svg className="w-10 p-2 mr-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
+                        <input
+                            className="hidden"
+                            type='checkbox'
+                            />
+                            <span>밝은 테마</span>
+                        </label>
+                    </div>
                 </div>
-                <p className="text-xs text-gray-400 p-4 pb-2">
-                    이 브라우저에만 설정이 적용됩니다.
-                    </p>
-                <div>
-                    <label className="flex items-center px-2 my-2 hover:bg-gray-200">
-                    <svg className="w-10 p-2 mr-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
-                    <input
-                        className="hidden"
-                        type='checkbox'
-                        />
-                        <span>어두운 테마</span>
-                    </label>
-                    <label className="flex items-center px-2 my-2 hover:bg-gray-200">
-                    <svg className="w-10 p-2 mr-2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
-                    <input
-                        className="hidden"
-                        type='checkbox'
-                        />
-                        <span>밝은 테마</span>
-                    </label>
-                </div>
-            </div>
-        : null}
+            : null}
         </>
     )
 }
