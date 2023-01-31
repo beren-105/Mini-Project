@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Link, Outlet, useParams } from "react-router-dom"
 
 import './App.css';
@@ -17,13 +17,34 @@ const contents = [
 
 const category = ['전체', '음악', '실시간', '게임', '뉴스', '축구', '요리']
 
+
+
 function App() {
   
+  // 다크모드
+  const [darkMode, setDarkMode] = useState(false)
+  const root = window.document.documentElement
 
+  function clickDarkMode() {
+    setDarkMode(false)
+    root.classList.add('dark')
+    root.classList.remove('light')
+  }
+
+  function clickLightMode() {
+    setDarkMode(true)
+    root.classList.add('light')
+    root.classList.remove('dark')
+  }
+
+    console.log(darkMode)
   return (
     <>
       <Header
       category = {category}
+      darkMode = {darkMode}
+      clickDarkMode = {clickDarkMode}
+      clickLightMode = {clickLightMode}
       />
       <SideBar />
       <Popular />
