@@ -1,13 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 // 헤더
 function Header(props) {
     const category = props.category
 
-    const darkMode = props.darkMode
-    const clickDarkMode = props.clickDarkMode
-    const clickLightMode = props.clickLightMode
-    
     const [openSettion, setOpenSettion] = useState(false)
     const [mode, setMode] = useState(false)
 
@@ -85,9 +81,6 @@ function Header(props) {
                             openSettion={openSettion}
                             mode={mode}
                             modeBack={modeBack}
-                            darkMode = {darkMode}
-                            clickDarkMode = {clickDarkMode}
-                            clickLightMode = {clickLightMode}
                             />
                     </div>
                     {/* 로그인 */}
@@ -148,6 +141,30 @@ function Setting(props) {
 function DarkMode(props) {
     const openSettion = props.openSettion
     const mode = props.mode
+
+    
+    const [theme, setTheme] = useState(localStorage.theme)
+    const mainTheme = theme === 'dark' ? 'light' : 'dark'
+    
+    useEffect(() => {
+        const root = window.document.documentElement
+        root.classList.remove(mainTheme)
+        root.classList.add(theme)
+        localStorage.setItem('theme', theme)
+    }, [theme, mainTheme])
+
+    const [modeSetting, setModeSetting] = useState(mainTheme === 'light' ? true : false)
+
+    function clickDarkmode() {
+        setModeSetting(false)
+        setTheme('dark')
+    }
+
+    function clickLoghtmode() {
+        setModeSetting(true)
+        setTheme('light')
+    }
+
     return (
         <>
             {openSettion && mode ?
@@ -163,18 +180,20 @@ function DarkMode(props) {
                         </p>
                     <div>
                         <label className="flex items-center px-2 my-2 hover:bg-zinc-200 dark:hover:bg-zinc-600">
-                        <svg className="w-10 p-2 mr-2 dark:fill-white" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
+                        <svg className={`w-10 p-2 mr-2 dark:fill-white ${mainTheme==='dark' ? 'invisible' : null}`} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
                         <input
-                            onChange={props.clickDarkMode}
+                            checked={modeSetting}
+                            onChange={clickDarkmode}
                             className="hidden"
                             type='checkbox'
                             />
                             <span>어두운 테마</span>
                         </label>
                         <label className="flex items-center px-2 my-2 hover:bg-zinc-200 dark:hover:bg-zinc-600">
-                        <svg className="w-10 p-2 mr-2 dark:fill-white" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
+                        <svg className={`w-10 p-2 mr-2 dark:fill-white ${mainTheme==='light' ? 'invisible' : null}`} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M9,18.7l-5.4-5.4l0.7-0.7L9,17.3L20.6,5.6l0.7,0.7L9,18.7z"></path></g></svg>
                         <input
-                            onChange={props.clickLightMode}
+                            checked={modeSetting}
+                            onChange={clickLoghtmode}
                             className="hidden"
                             type='checkbox'
                             />
