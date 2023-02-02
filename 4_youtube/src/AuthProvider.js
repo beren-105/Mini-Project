@@ -4,11 +4,11 @@ export default function AuthProvider(props) {
     const AuthContext = props.AuthContext
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
-    const [login, setlogin] = useState(false)
+    // const [login, setlogin] = useState(false)
+    const [login, setlogin] = useState(true)
 
-    console.log(email)
-    console.log(password)
-    console.log(login)
+    // console.log(email)
+    // console.log(password)
 
     function signInEmail(email) {
       setEmail(email)
@@ -24,7 +24,7 @@ export default function AuthProvider(props) {
       setPassword(null)
       setlogin(false)
     }
-    const value= {email, password, signInEmail, signInPaddword, signOut}
+    const value= {email, password, login, signInEmail, signInPaddword, signOut}
   
     return (
       <AuthContext.Provider value={value}>

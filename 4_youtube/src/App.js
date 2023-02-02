@@ -74,13 +74,22 @@ function Home(props) {
   const AuthContext = props.AuthContext
   const auth = useContext(AuthContext)
 
+  const [clickSideMenu, setClickSideMenu] = useState(false)
+  
+  console.log(clickSideMenu)
   return (
     <>
       <Header
         category = {category}
         auth = {auth}
+        clickSideMenu = {clickSideMenu}
+        setClickSideMenu = {setClickSideMenu}
       />
-      <SideBar />
+      <SideBar
+      
+      clickSideMenu = {clickSideMenu}
+      setClickSideMenu = {setClickSideMenu}
+      />
       <Popular />
     </>
   )

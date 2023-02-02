@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function SideBar() {
+function SideBar(props) {
 
     const sideNav1 = [
         {id: 'nav0', name:'홈', icon: <svg className="w-10 p-2 mx-2 dark:fill-white" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M4,10V21h6V15h4v6h6V10L12,3Z"></path></g></svg>},
@@ -16,11 +16,15 @@ function SideBar() {
 
     return(
         <>
-        <section className="fixed top-0 left-0 bg-white w-56 h-full z-30 -translate-x-56 xl:translate-x-0 dark:bg-black dark:text-white">
+        <section className={`fixed top-0 left-0 bg-white w-56 h-full z-30 ${props.clickSideMenu ? null : '-translate-x-56'} xl:translate-x-0 dark:bg-black dark:text-white duration-300`}>
         {/* -translate-x-56 */}
             {/* 로고 */}
             <div className="flex items-center ml-4">
-                <svg className="w-10 p-2 hover:bg-zinc-200 rounded-full transition dark:fill-white" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g></svg>
+                <button
+                    onClick={() => props.setClickSideMenu(!props.clickSideMenu)}
+                >
+                    <svg className="w-10 p-2 hover:bg-zinc-200 rounded-full transition dark:fill-white" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></g></svg>
+                </button>
                 <a
                 href="../public/index.html"
                 >
@@ -83,7 +87,10 @@ function SideBar() {
                 </div>
             </div>
         </section>
-        <div className="fixed inset-0 bg-black opacity-50 z-20 hidden"></div>
+        <div
+            className={`fixed inset-0 bg-black opacity-50 z-20 ${props.clickSideMenu ? null : 'hidden'} xl:hidden`}
+            onClick={() => props.setClickSideMenu(false)}
+        ></div>
         </>
     )
 }
