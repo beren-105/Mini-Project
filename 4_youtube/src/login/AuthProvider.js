@@ -4,8 +4,8 @@ export default function AuthProvider(props) {
     const AuthContext = props.AuthContext
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
-    // const [login, setlogin] = useState(false)
-    const [login, setlogin] = useState(true)
+    const [login, setlogin] = useState(false)
+    // const [login, setlogin] = useState(true)
 
     // console.log(email)
     // console.log(password)
@@ -13,7 +13,7 @@ export default function AuthProvider(props) {
     function signInEmail(email) {
       setEmail(email)
     }
-  
+    
     function signInPaddword(password) {
       setPassword(password)
       setlogin(true)
