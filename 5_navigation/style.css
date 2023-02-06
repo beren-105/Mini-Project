@@ -1,0 +1,233 @@
+:root {
+    --color-white: #fff;
+    --color-grey: #D1D1D1;
+    --color-blue: #009EFF;
+    --color-sky: #82C3EC;
+    --color-article: #B9E0FF;
+    --transition: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F1F6F5;
+}
+
+article {
+    margin-top: 50px;
+    width: 350px;
+    height: 150px;
+    border-radius: 20px;
+    background-color: #B9E0FF;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 2px 2px 20px rgba(0 0 0 / 0.2);
+    overflow: hidden;
+}
+
+article input {
+    display: none;
+}
+
+article div {
+    width: 100%;
+    background-color: var(--color-white);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+article div label {
+    padding: 1rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+article div label:hover svg {
+    fill: var(--color-sky);
+}
+
+article div label svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-grey);
+    transition: var(--transition);
+}
+
+article div label span {
+    display: none;
+    transition: var(--transition);
+}
+
+article input:nth-child(1):checked~div label:nth-child(1) svg,
+article input:nth-child(2):checked~div label:nth-child(2) svg,
+article input:nth-child(3):checked~div label:nth-child(3) svg,
+article input:nth-child(4):checked~div label:nth-child(4) svg {
+    fill: var(--color-blue);
+}
+
+
+/* line */
+div.line::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 56px;
+    height: 3px;
+    margin: 0 1rem;
+    background-color: var(--color-blue);
+    transition: var(--transition);
+}
+
+article input#Home1:checked~div.line::after {
+    left: 0%;
+}
+article input#shopping1:checked~div.line::after {
+    left: 25%;
+}
+article input#user1:checked~div.line::after {
+    left: 50%;
+}
+article input#setting1:checked~div.line::after {
+    left: 75%;
+}
+
+
+
+/* rounde */
+article div.rounde label {
+    background-color: var(--color-white);
+    border-radius: 50%;
+}
+article div.rounde label::before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-bottom-right-radius: 60%;
+    border-bottom: 8px solid var(--color-white);
+    position: absolute;
+    top: 0px;
+    left: -7px;
+}
+
+article div.rounde label::after {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-bottom-left-radius: 60%;
+    border-bottom: 8px solid var(--color-white);
+    position: absolute;
+    top: 0px;
+    right: -7px;
+}
+
+article input#Home2:checked~div label[for="Home2"],
+article input#shopping2:checked~div label[for="shopping2"],
+article input#user2:checked~div label[for="user2"],
+article input#setting2:checked~div label[for="setting2"] {
+    transform: translateY(-25%);
+}
+
+/* rounde2 */
+
+article div.rounde2 div {
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    margin: 0 0.63rem;
+    background-color: var(--color-article);
+    border: 10px solid var(--color-article);
+    border-radius: 50%;
+    left: 0;
+    top: -20px;
+    transition: var(--transition);
+}
+
+article div.rounde2 div::before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 10px;
+    border-top-right-radius: 100%;
+    border-right: 15px solid var(--color-article);
+    position: absolute;
+    top: 8px;
+    left: -23px;
+}
+
+article div.rounde2 div::after {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 10px;
+    border-top-left-radius: 100%;
+    border-left: 15px solid var(--color-article);
+    position: absolute;
+    top: 8px;
+    right: -23px;
+}
+
+article div.rounde2 label {
+    background-color: var(--color-white);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+article input#Home3:checked~div.rounde2 div {left:0;}
+article input#shopping3:checked~div.rounde2 div {left:25%;}
+article input#user3:checked~div.rounde2 div {left:50%;}
+article input#setting3:checked~div.rounde2 div {left:75%;}
+
+article input#Home3:checked~div label[for="Home3"],
+article input#shopping3:checked~div label[for="shopping3"],
+article input#user3:checked~div label[for="user3"],
+article input#setting3:checked~div label[for="setting3"] {
+    transform: translateY(-25%);
+}
+
+/* name */
+article div.name label {
+    padding-bottom: 0.25rem;
+}
+article div.name label span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--color-blue);
+    transform: translateY(50px);
+}
+
+article input#Home4:checked~div label[for="Home4"] svg,
+article input#shopping4:checked~div label[for="shopping4"] svg,
+article input#user4:checked~div label[for="user4"] svg,
+article input#setting4:checked~div label[for="setting4"] svg {
+    transform: translateY(-5px);
+    width: 15px;
+    height: 15px;
+}
+
+article input#Home4:checked~div label[for="Home4"] span,
+article input#shopping4:checked~div label[for="shopping4"] span,
+article input#user4:checked~div label[for="user4"] span,
+article input#setting4:checked~div label[for="setting4"] span {
+    transform: translateY(-5px);
+}
+
+
+/* https://codepen.io/chrisbautista/pen/NWXjqLN */
