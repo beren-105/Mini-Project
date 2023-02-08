@@ -1,0 +1,98 @@
+:root {
+    --color-black: #20262E;
+    --color-orange: #FF7B54;
+    --color-yellow: #FFDB89;
+    --color-white: #fff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-black);
+}
+
+.memoryGame {
+    color: var(--color-white);
+    width: 610px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.memoryGame .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.memoryGame .card {
+    width: 140px;
+    height: 140px;
+    background-color: var(--color-orange);
+    box-shadow: 0 0 0 var(--color-yellow);
+    border-radius: 10px;
+    transition: 0.5s;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+}
+
+.memoryGame .card .img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.memoryGame .card:hover {
+    box-shadow: 7px 7px 0 var(--color-yellow);
+}
+
+.memoryGame .pickde {
+    transform: rotateY(360deg);
+}
+
+.memoryGame .clear {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.memoryGame .clear div {
+    color: var(--color-black);
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-yellow);
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.memoryGame .clear div  h2 {
+    margin: 0.25rem;
+}
+
+.memoryGame .clear div button {
+    border: none;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.memoryGame .clear div button:hover {
+    background-color: var(--color-orange);
+}
+
+
+.hidden {display: none;}
