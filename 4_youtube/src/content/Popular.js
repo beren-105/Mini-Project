@@ -2,7 +2,6 @@ import { useEffect } from "react"
 
 function Popular(props) {
     const data = props.data.items
-
     useEffect (()=>{
         days()
     }, [])
@@ -25,23 +24,25 @@ function Popular(props) {
     
     return (
         <section className="flex flex-wrap pt-4 max-sm:px-20 xl:ml-56 dark:bg-black dark:text-white">
-            {data.map(content => (
-                <article className="px-2 mb-16 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+            {data.map((content,i) => (
+                <article key={'a' + i} className="px-2 mb-16 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                     <img
+                        key={'b' + i}
                         className="w-full object-cover mb-2 rounded-xl"
                         src={content.snippet.thumbnails.medium.url}
                     />
-                    <div className="flex">
-                        <div className="w-10 h-10 mr-4 rounded-full object-cover bg-zinc-200 overflow-hidden shrink-0">
+                    <div key={'c' + i} className="flex">
+                        <div key={'d' + i} className="w-10 h-10 mr-4 rounded-full object-cover bg-zinc-200 overflow-hidden shrink-0">
                             <img
+                                key={'e' + i}
                                 className="object-cover h-10"
                                 src={content.snippet.thumbnails.medium.url}
                             />
                         </div>
-                        <div>
-                            <h4 className="mb-1">{content.snippet.localized.title}</h4>
-                            <p className="text-xs text-zinc-500">{content.snippet.channelTitle}</p>
-                            <p className="text-xs text-zinc-500">조회수 12만회 · {days(content.snippet.publishedAt)}</p>
+                        <div key={'f' + i}>
+                            <h4 key={'g' + i} className="mb-1">{content.snippet.localized.title}</h4>
+                            <p key={'h' + i} className="text-xs text-zinc-500">{content.snippet.channelTitle}</p>
+                            <p key={'i' + i} className="text-xs text-zinc-500">조회수 12만회 · {days(content.snippet.publishedAt)}</p>
                         </div>
                     </div>
                 </article>

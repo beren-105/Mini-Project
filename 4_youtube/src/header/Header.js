@@ -118,11 +118,11 @@ function Header(props) {
                 <form className="flex items-center w-full max-md:justify-end">
                     <div className="flex items-center justify-center w-full max-md:hidden">
                         <input
-                            className="border px-4 py-2 rounded-l-3xl w-2/4"
+                            className="border px-4 py-2 rounded-l-3xl w-2/4 dark:bg-black dark:border-zinc-600"
                             type="text"
                             placeholder="검색"
                         />
-                        <button className="border border-l-0 rounded-r-3xl bg-zinc-100 px-2">
+                        <button className="border border-l-0 rounded-r-3xl bg-zinc-100 px-2 dark:bg-zinc-900 dark:border-zinc-600">
                             <svg className="w-10 p-2 dark:fill-white" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z"></path></g></svg>
                         </button>
                     </div>
@@ -157,7 +157,7 @@ function Header(props) {
                 </div>
                 <div>
                     {category.map((item, i) => (
-                        <button className="first:bg-slate-900 first:text-white px-3 py-1 bg-zinc-200 mx-2 rounded text-sm dark:bg-zinc-800 dark:first:bg-white dark:first:text-black" key={i}>{item}</button>
+                        <button key={i} className="first:bg-slate-900 first:text-white px-3 py-1 bg-zinc-200 mx-2 rounded text-sm dark:bg-zinc-800 dark:first:bg-white dark:first:text-black">{item}</button>
                     ))}
                 </div>
             </div>

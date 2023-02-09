@@ -31,8 +31,6 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [data, setData] = useState(null)
 
-  console.log(data)
-
   useEffect(() => {
     fetchData()
       .then(data => {
@@ -80,7 +78,6 @@ function Home(props) {
 
   const [clickSideMenu, setClickSideMenu] = useState(false)
   
-  console.log(clickSideMenu)
   return (
     <>
       <Header
@@ -90,9 +87,9 @@ function Home(props) {
         setClickSideMenu = {setClickSideMenu}
       />
       <SideBar
-      
-      clickSideMenu = {clickSideMenu}
-      setClickSideMenu = {setClickSideMenu}
+        auth = {auth}
+        clickSideMenu = {clickSideMenu}
+        setClickSideMenu = {setClickSideMenu}
       />
       <Popular
         data = {props.data}
