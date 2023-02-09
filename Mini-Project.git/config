@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/beren-105/Mini-Project.git
+	fetch = +refs/*:refs/*
+	mirror = true
+	pushurl = https://github.com/beren-105/Clone-coding_YouTube.git
