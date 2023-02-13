@@ -1,19 +1,16 @@
 const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-const weekName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const weekName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
 
 const date = new Date()
-
-
 let prevLast = new Date()
 let nowLast = new Date()
 
-const tableDay = document.querySelector('.tableDay')
-const tableWeek = document.querySelector('.tableWeek')
-
-type Days = (prevLast :Date, nowLast :Date) => void
+const tableDays = document.querySelector('.tableDays')
 
 document.addEventListener('DOMContentLoaded', () => {
-    prevLast = new Date(date.getFullYear(), date.getMonth(), 0)
+    const tableWeek = document.querySelector('.tableWeek')
+    
     nowLast = new Date(date.getFullYear(), date.getMonth()+1, 0)
 
     // 요일 출력하기
@@ -25,70 +22,58 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
+    day(nowLast)
+
+})
+
+type Days = (nowLast :Date) => void
+
+let day: Days = function (nowLast) {
+    const mounthTitle = document.querySelector('.title')
+
+    const tableDay = document.createElement('div')
+    tableDay.classList.add('tableDay', 'grid')
+    tableDays?.appendChild(tableDay)
+
+    prevLast = new Date(date.getFullYear(), date.getMonth(), 0)
+
+    if (mounthTitle instanceof HTMLHeadingElement) {
+        mounthTitle.innerText = monthName[nowLast.getMonth()]
+    }
+
     if (tableDay instanceof HTMLDivElement) {
-        for (let i=prevLast.getDay(); i>=0; i--) {
+        for (let i=prevLast.getDate() - prevLast.getDay(); i<=prevLast.getDate(); i++) {
             const p = document.createElement('p')
             p.classList.add('prev')
+            p.innerHTML = i.toString()
             tableDay.appendChild(p)
         }
         for (let i=1; i<=nowLast.getDate(); i++) {
             const p = document.createElement('p')
             p.classList.add('now')
+            p.innerText = i.toString()
             tableDay.appendChild(p)
         }
-        for (let i=1; i<=(!0 ? 6-nowLast.getDay() : 1); i++) {
+        for (let i=1; i<=(6 - nowLast.getDay() === 6 ? 0 : 6 - nowLast.getDay()); i++) {
             const p = document.createElement('p')
             p.classList.add('next')
+            p.innerText = i.toString()
             tableDay.appendChild(p)
         }
     }
-
-    day(prevLast, nowLast)
-})
-
-let day :Days = function (prevLast, nowLast) {
-    const mounthTitle = document.querySelector('.title')
-
-    const prev = document.querySelectorAll('.prev')
-    const now = document.querySelectorAll('.now')
-    const next = document.querySelectorAll('.next')
-    if (mounthTitle instanceof HTMLHeadingElement) {
-        mounthTitle.innerText = monthName[nowLast.getMonth()]
-    }
-
-    let prevLastArr : number[] = []
-    
-    for (let i=prevLast.getDay(); i>=0; i--) {
-        prevLastArr.push(i)
-    }
-    prev.forEach((prevs :HTMLParagraphElement, i :number) => {
-        if (prevs instanceof HTMLParagraphElement) {
-            prevs.innerHTML = (prevLast.getDate()-(prevLastArr[i])).toString()
-        }
-    })
-    
-    now.forEach((nows :HTMLElement, i :number) => {
-        if (nows instanceof HTMLParagraphElement) {
-            nows.innerText = (i+1).toString()
-        }
-    })
-
-    for (let i=0; i<=(!0 ? 6-nowLast.getDay() : 1); i++) {
-        const a = next[i]
-        {a instanceof HTMLParagraphElement ?
-            a.innerText = (i+1).toString()
-            : undefined
-        }
-    }
-    
 }
 
 const prevBtn = document.querySelector('.prevBtn')
 const nextBtn = document.querySelector('.nextBtn')
+let index = 0
 
 prevBtn?.addEventListener('click', () => {
-    console.log('zzz')
-    prevLast = new Date(date.getFullYear(), date.getMonth()-1, 0)
-    nowLast = new Date(date.getFullYear(), date.getMonth()0, 0)
-    day(prevLast, nowLast)
+    const tableDay = document.querySelector('.tableDay')
+    index++
+    nowLast = new Date(date.getFullYear(), date.getMonth()-index, 0)
+    day(nowLast)
+    
+    if (tableDays instanceof HTMLDivElement) {
+        tableDays.style.transform = `translateY(-${260*index}px)`
+    }
 })

@@ -28,10 +28,12 @@ section h1 {color: var(--color-dark-bule);}
 
 .calender {
     width: 364px;
+    height: 342px;
     background-color: var(--color-white);
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
 }
 
 .monthName {
@@ -62,6 +64,7 @@ section h1 {color: var(--color-dark-bule);}
     margin: 0;
 }
 
+
 .grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -78,6 +81,17 @@ section h1 {color: var(--color-dark-bule);}
     font-size: 0.75rem;
 }
 
+.tableDaysA {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 260px;
+    width: 100%;
+    overflow: hidden;
+}
+.tableDays {
+    transition: 0.5s;
+}
 
 .tableDay p {
     display: inline-flex;
