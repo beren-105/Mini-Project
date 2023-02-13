@@ -27,6 +27,7 @@ section {
 section h1 {color: var(--color-dark-bule);}
 
 .calender {
+    width: 364px;
     background-color: var(--color-white);
     border-radius: 10px;
     overflow: hidden;
@@ -61,27 +62,43 @@ section h1 {color: var(--color-dark-bule);}
     margin: 0;
 }
 
-table {
-    width: 340px;
-    border-collapse : collapse;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 }
 
-table thead {
+.tableWeek {
     background-color: var(--color-blue);
     color: var(--color-white);
 }
 
-table thead tr th {
+.tableWeek p {
+    margin: 0;
     padding: 0.5rem 0;
+    font-size: 0.75rem;
 }
 
 
-table tbody tr td {
-    height: 46px;
-    border-radius: var(--round-50);
+.tableDay p {
+    display: inline-flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 6px;
     color: var(--color-dark-bule);
+    border-radius: var(--round-50);
+    transition: var(--transition);
 }
 
-table tbody tr td:hover {
+.tableDay p.prev, p.next {
+    color: #ccc;
+}
+
+.tableDay p.now:hover {
     background-color: var(--color-tbody-hover);
+    cursor: pointer;
+}
+
+.tableDay p.now.active {
+    background-color: var(--color-sky);
 }
