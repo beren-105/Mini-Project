@@ -148,8 +148,6 @@ nextBtn?.addEventListener('click', () => {
     }
 
     setTimeout(remove,500)
-    
-    console.log(index)
 })
 
 function remove() {

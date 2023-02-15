@@ -116,7 +116,6 @@ nextBtn === null || nextBtn === void 0 ? void 0 : nextBtn.addEventListener('clic
         tableDays.style.transform = "translateX(-".concat(364, "px)");
     }
     setTimeout(remove, 500);
-    console.log(index);
 });
 function remove() {
     var _a;
