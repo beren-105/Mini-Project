@@ -38,7 +38,7 @@ function randons() {
     let randomNub = Math.floor(Math.random() * 24)
     const card = document.querySelectorAll('.card')
     const img = document.createElement('img')
-    img.setAttribute('src', './image/fox.png')
+    img.setAttribute('src', 'https://raw.githubusercontent.com/beren-105/Mini-Project/main/7_Whack_a_mole/image/fox.png')
 
     console.log(randomNub)
     card[randomNub].appendChild(img)
