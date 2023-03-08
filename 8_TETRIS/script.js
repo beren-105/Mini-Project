@@ -1,4 +1,4 @@
-var tetrominos = [
+const tetrominos = [
     [
         [1, 1],
         [1, 1],
@@ -35,37 +35,38 @@ var tetrominos = [
         [0, 0, 0],
     ], // T
 ];
-var tetrominoColor = [
+const tetrominoColor = [
     '#F16767', '#F99417', '#F2CD5C', '#CDE990', '#89C4E1', '#00337C', '#D09CFA'
 ];
 random(tetrominos);
 random(tetrominoColor);
 function random(arr) {
-    var _a;
-    for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        _a = [arr[j], arr[i]], arr[i] = _a[0], arr[j] = _a[1];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
 }
-var row = 10;
-var col = 20;
-var currentPositionX = 3;
-var currentPositionY = 0;
-var rotate = 0;
-var hold = tetrominos[0];
-var draw = function (tetromino, x, y) {
-    var bord = document.querySelector('#bord');
+const width = 10;
+const height = 20;
+let currentPositionX = 3;
+let currentPositionY = 0;
+let rotate = 0;
+let hold = tetrominos[0];
+const gameBoard = Array.from({ length: height }, () => new Array(width).fill(0));
+console.table(gameBoard);
+let draw = function (tetromino, x, y) {
+    const bord = document.querySelector('#bord');
     if (bord instanceof HTMLCanvasElement) {
-        var ctx_1 = bord.getContext('2d');
-        if (ctx_1 instanceof CanvasRenderingContext2D) {
-            var size_1 = 30;
-            ctx_1.clearRect(0, 0, ctx_1.canvas.width, ctx_1.canvas.height);
-            ctx_1.fillStyle = tetrominoColor[0];
-            tetromino.forEach(function (row, rowY) {
-                row.forEach(function (col, colX) {
+        const ctx = bord.getContext('2d');
+        if (ctx instanceof CanvasRenderingContext2D) {
+            const size = 30;
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = tetrominoColor[0];
+            tetromino.forEach((row, rowY) => {
+                row.forEach((col, colX) => {
                     if (col > 0) {
-                        ctx_1.fillRect((colX + x) * size_1, (rowY + y) * size_1, size_1, size_1);
+                        ctx.fillRect((colX + x) * size, (rowY + y) * size, size, size);
                     }
                 });
             });
@@ -86,24 +87,51 @@ function moveTetromino(e) {
             moveTetrominoDown();
             break;
         case ' ':
+            rotateTetromino();
             break;
     }
 }
+function collisionCheck() {
+    let isMove = true;
+    hold.map((row, y) => {
+        row.map((col, x) => {
+            const boardCol = currentPositionX + x;
+            const boardRow = currentPositionY + y;
+            console.log(boardRow);
+            if (col > 0) {
+                if (boardRow < 0 || boardRow >= gameBoard.length - 1 ||
+                    boardCol < 1 || boardCol >= gameBoard[0].length) {
+                    isMove = false;
+                }
+            }
+        });
+    });
+    return isMove;
+}
 function moveTetrominoLeft() {
-    if (currentPositionX > 0) {
+    if (collisionCheck()) {
         currentPositionX--;
         draw(hold, currentPositionX, currentPositionY);
     }
 }
 function moveTetrominoRight() {
-    if (currentPositionX < (row - hold[0].length)) {
+    if (collisionCheck()) {
         currentPositionX++;
         draw(hold, currentPositionX, currentPositionY);
     }
 }
 function moveTetrominoDown() {
-    if (currentPositionY < col - hold.length) {
+    if (collisionCheck()) {
         currentPositionY++;
         draw(hold, currentPositionX, currentPositionY);
     }
+}
+function rotateTetromino() {
+    for (let y = 0; y < hold.length; y++) {
+        for (let x = 0; x < y; x++) {
+            [hold[x][y], hold[y][x]] = [hold[y][x], hold[x][y]];
+        }
+    }
+    hold.forEach(row => row.reverse());
+    draw(hold, currentPositionX, currentPositionY);
 }

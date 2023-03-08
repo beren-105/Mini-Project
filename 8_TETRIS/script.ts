@@ -54,17 +54,20 @@ function random(arr:number[][][]|string[]):number[][][]|string[]  {
 }
 
 
-const row = 10;
-const col = 20;
+const width = 10;
+const height = 20;
 let currentPositionX = 3
 let currentPositionY = 0
 let rotate = 0;
 let hold = tetrominos[0];
+const gameBoard = Array.from({ length: height }, () => new Array(width).fill(0));
 
+console.table(gameBoard)
 
 type Draw = (tetromino:number[][], x:number, y:number) => void
 let draw:Draw = function (tetromino, x, y) {
     const bord = document.querySelector('#bord');
+
     if (bord instanceof HTMLCanvasElement) {
         const ctx = bord.getContext('2d');
         
@@ -100,28 +103,57 @@ function moveTetromino(e:KeyboardEvent) {
             moveTetrominoDown();
             break;
         case ' ' : 
-
+            rotateTetromino()
             break;
     }
 }
+function collisionCheck() {
+    let isMove = true
+    hold.map((row, y) => {
+        row.map((col, x) => {
+            const boardCol = currentPositionX + x
+            const boardRow = currentPositionY + y
+            console.log(boardRow)
+            if (col > 0) {
+                if (boardRow < 0 || boardRow >= gameBoard.length -1 ||
+                    boardCol < 1 || boardCol >= gameBoard[0].length) {
+                    isMove = false
+                }
+            }
+        })
+    })
+
+    return isMove
+}
 
 function moveTetrominoLeft() {
-    if (currentPositionX > 0) {
+    if (collisionCheck()) {
         currentPositionX--
         draw(hold, currentPositionX, currentPositionY)
     }
 }
 
 function moveTetrominoRight() {
-    if (currentPositionX < (row-hold[0].length)) {
+    if (collisionCheck()) {
         currentPositionX++
         draw(hold, currentPositionX, currentPositionY)
     }
 }
 
 function moveTetrominoDown() {
-    if (currentPositionY < col-hold.length) {
+    if (collisionCheck()) {
         currentPositionY++
         draw(hold, currentPositionX, currentPositionY)
     }
+}
+
+function rotateTetromino() {
+    for (let y = 0; y < hold.length; y++) {
+        for (let x = 0; x < y; x++) {
+            [hold[x][y], hold[y][x]] = [hold[y][x], hold[x][y]]
+        }
+    }
+    hold.forEach(row => row.reverse())
+    draw(hold, currentPositionX, currentPositionY)
+    
 }
