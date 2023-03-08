@@ -61,6 +61,7 @@ let draw = function (tetromino, x, y) {
         const ctx = bord.getContext('2d');
         if (ctx instanceof CanvasRenderingContext2D) {
             const size = 30;
+            // 처음 좌표 리셋
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
             ctx.fillStyle = tetrominoColor[0];
             tetromino.forEach((row, rowY) => {
@@ -76,6 +77,7 @@ let draw = function (tetromino, x, y) {
 draw(hold, currentPositionX, currentPositionY);
 document.addEventListener('keyup', moveTetromino);
 function moveTetromino(e) {
+    collisionCheck();
     switch (e.key) {
         case 'ArrowLeft':
             moveTetrominoLeft();
@@ -91,37 +93,50 @@ function moveTetromino(e) {
             break;
     }
 }
+let direction = '';
 function collisionCheck() {
     let isMove = true;
     hold.map((row, y) => {
         row.map((col, x) => {
             const boardCol = currentPositionX + x;
             const boardRow = currentPositionY + y;
-            console.log(boardRow);
             if (col > 0) {
-                if (boardRow < 0 || boardRow >= gameBoard.length - 1 ||
-                    boardCol < 1 || boardCol >= gameBoard[0].length) {
+                if (boardRow < 0 || boardRow >= gameBoard.length ||
+                    boardCol < 0 || boardCol >= gameBoard[0].length) {
                     isMove = false;
                 }
             }
         });
     });
+    if (currentPositionX === 0) {
+        direction = 'left';
+    }
+    else if (currentPositionX + hold[0].length === gameBoard[0].length) {
+        direction = 'right';
+    }
+    else if (currentPositionY + hold.length === gameBoard.length) {
+        direction = 'down';
+    }
+    else {
+        direction = '';
+    }
+    console.log(direction);
     return isMove;
 }
 function moveTetrominoLeft() {
-    if (collisionCheck()) {
+    if (direction !== 'left') {
         currentPositionX--;
         draw(hold, currentPositionX, currentPositionY);
     }
 }
 function moveTetrominoRight() {
-    if (collisionCheck()) {
+    if (direction !== 'right') {
         currentPositionX++;
         draw(hold, currentPositionX, currentPositionY);
     }
 }
 function moveTetrominoDown() {
-    if (collisionCheck()) {
+    if (direction !== 'down') {
         currentPositionY++;
         draw(hold, currentPositionX, currentPositionY);
     }
