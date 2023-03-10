@@ -23,8 +23,14 @@ body {
     display: flex;
 }
 
+button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
 
-/* 하단 건반 */
+/* 흰 건반 */
 
 .keys .key {
     display: flex;
@@ -47,8 +53,10 @@ body {
     border-radius: 0 0 10px 10px;
     background-color: #fff;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: end;
     background: linear-gradient(to bottom , #eee, #fff);
+    transition: 0.05s;
 }
 
 .keys .key .key-ative {
@@ -69,12 +77,14 @@ body {
     background: linear-gradient(to bottom , rgb(130, 130, 130, 50), transparent);
 }
 
-.keys .key .key-top span.key-name {
+.keys .key .key-top span.key-vaule {
     width: 100%;
     text-align: center;
-    border: none;
     padding-bottom: 20px;
-    background-color: transparent;
+}
+
+.keys .key .key-top span.key-name {
+    padding-bottom: 10px;
 }
 
 .keys .key .key-bottom {
@@ -83,7 +93,7 @@ body {
 }
 
 
-/* 상단 건반 */
+/* 검은 건반 */
 
 .sharp {
     z-index: 10;
@@ -93,6 +103,8 @@ body {
     right: 0;
     width: 100%;
     display: flex;
+    color: white;
+    text-align: center;
 }
 
 .sharp .sharp-key {
@@ -102,27 +114,30 @@ body {
     height: 150px;
     background-color: #181818;
     border-radius: 0 0 10px 10px;
+    transition: 0.05s;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 
 .sharp .sharp-key .sharp-inner {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: end;
     height: 85%;
     margin: 10px;
     border-radius: 5px;
     background: linear-gradient(to bottom , #313131, #444444);
 }
 
-.sharp .sharp-key span.sharp-name {
+.sharp .sharp-key span.sharp-vaule {
     width: 100%;
-    color: white;
-    text-align: center;
     margin-bottom: 10px;
 }
 
+
 .sharp .sharp-active {
     height: 170px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
 .empty {
