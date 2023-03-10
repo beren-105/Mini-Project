@@ -13,7 +13,7 @@ function pianoSetting() {
     if (keys instanceof HTMLDivElement) {
         whiteKeys.forEach((whiteKey) => {
             
-            const key = document.createElement('div');
+            const key = document.createElement('button');
 
             key.classList.add('key');
             key.setAttribute('id', 'key');
@@ -43,7 +43,7 @@ function pianoSetting() {
 
 
                 //흑건
-                const sharpKey = document.createElement('div');
+                const sharpKey = document.createElement('button');
 
                 sharpKey.classList.add('sharp-key');
                 sharpKey.setAttribute('id', 'sharp-key');
@@ -59,7 +59,7 @@ function pianoSetting() {
 
             } else {
 
-                const sharpKey = document.createElement('div');
+                const sharpKey = document.createElement('button');
 
                 sharpKey.classList.add('sharp-key');
                 sharpKey.setAttribute('id', 'sharp-key');
@@ -85,19 +85,21 @@ function pianoSetting() {
     document.addEventListener('keyup', (e) => handleKeyup(e))
 
     keysId.forEach((key) => {
-        key.addEventListener('click', (e) => handleClickKey(e))
+        if (key instanceof HTMLButtonElement) {
+            key.addEventListener('mousedown', (e) => handleMouseDown(e))
+            key.addEventListener('mouseup', (e) => handleMouseUp(e))
+        }
+    })
+
+    sharpId.forEach((sharp) => {
+        if (sharp instanceof HTMLButtonElement) {
+            sharp.addEventListener('mousedown', (e) => handleMouseDown(e))
+            sharp.addEventListener('mouseup', (e) => handleMouseUp(e))
+        }
     })
 
 }
 
-function handleClickKey(e:MouseEvent) {
-    const keys = document.querySelectorAll('#key');
-    const sharp = document.querySelectorAll('#sharp-key');
-
-    console.log('a')
-    console.log(e.target)
-    
-}
 
 function handleKeyDowm(e:KeyboardEvent):void {
 
@@ -105,7 +107,7 @@ function handleKeyDowm(e:KeyboardEvent):void {
     const sharp = document.querySelectorAll('#sharp-key');
 
     keys.forEach((key) => {
-        if (key instanceof HTMLDivElement) {
+        if (key instanceof HTMLButtonElement) {
             const keyboard = key.getAttribute('data-keyboard');
 
             if (e.code === keyboard && !e.repeat) {
@@ -119,7 +121,7 @@ function handleKeyDowm(e:KeyboardEvent):void {
     })
 
     sharp.forEach((key) => {
-        if (key instanceof HTMLDivElement) {
+        if (key instanceof HTMLButtonElement) {
             const keyboard = key.getAttribute('data-keyboard');
 
             if (e.code === keyboard && !e.repeat) {
@@ -139,22 +141,63 @@ function handleKeyup(e:KeyboardEvent):void {
     const sharp = document.querySelectorAll('#sharp-key');
 
     keys.forEach((key) => {
-        if (key instanceof HTMLDivElement) {
+        if (key instanceof HTMLButtonElement) {
             const keyboard = key.getAttribute('data-keyboard');
 
-            if (e.code === keyboard && !e.repeat) {
+            if (e.code === keyboard) {
                 key.firstElementChild?.classList.remove('key-ative');
             }
         }
     })
 
     sharp.forEach((key) => {
-        if (key instanceof HTMLDivElement) {
+        if (key instanceof HTMLButtonElement) {
             const keyboard = key.getAttribute('data-keyboard');
 
-            if (e.code === keyboard && !e.repeat) {
+            if (e.code === keyboard) {
                 key.classList.remove('sharp-active');
             }
         }
     })
+}
+
+function handleMouseDown(e:MouseEvent) {
+
+    if (e.currentTarget instanceof HTMLButtonElement) {
+        const id = e.currentTarget.getAttribute('id');
+        const keyboard = e.currentTarget.getAttribute('data-keyboard');
+        
+        if (id === 'key') {
+            const keyData = whiteKeys.find(whiteKey => whiteKey.keyboard === keyboard);
+            const audio = new Audio(keyData?.src);
+    
+            audio.play();
+            
+            e.currentTarget.firstElementChild?.classList.add('key-ative');
+        }
+
+        if (id === 'sharp-key') {
+            const keyData = blackKeys.find(blackKey => blackKey.keyboard === keyboard);
+            const audio = new Audio(keyData?.src);
+    
+            audio.play();
+            
+            e.currentTarget.classList.add('sharp-active');
+        }
+    }
+    
+}
+
+function handleMouseUp(e:MouseEvent) {
+    if (e.currentTarget instanceof HTMLButtonElement) {
+        const id = e.currentTarget.getAttribute('id');
+
+        if (id === 'key') {
+            e.currentTarget.firstElementChild?.classList.remove('key-ative');
+        }
+
+        if (id === 'sharp-key') {
+            e.currentTarget.classList.remove('sharp-active');
+        }
+    }
 }
