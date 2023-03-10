@@ -124,3 +124,9 @@ body {
 .sharp .sharp-active {
     height: 170px;
 }
+
+.empty {
+    flex-shrink: 0;
+    margin-right: 20px;
+    width: 48px;
+}
