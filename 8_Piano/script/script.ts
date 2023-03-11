@@ -1,4 +1,5 @@
-import { whiteKeys, blackKeys, littleStar } from './pianoItems.js'
+import { whiteKeys, blackKeys } from './pianoItems.js'
+import { Score } from './score.js'
 
 document.addEventListener('DOMContentLoaded', pianoSetting);
 
@@ -191,7 +192,7 @@ function handleMouseUp(e:MouseEvent) {
         const id = e.currentTarget.getAttribute('id');
 
         if (id === 'key') {
-            e.currentTarget.firstElementChild?.classList.remove('key-ative');
+            e.currentTarget.firstElementChild?.classList.remove('key-active');
         }
 
         if (id === 'sharp-key') {

@@ -147,7 +147,7 @@ function handleMouseUp(e) {
     if (e.currentTarget instanceof HTMLButtonElement) {
         const id = e.currentTarget.getAttribute('id');
         if (id === 'key') {
-            (_a = e.currentTarget.firstElementChild) === null || _a === void 0 ? void 0 : _a.classList.remove('key-ative');
+            (_a = e.currentTarget.firstElementChild) === null || _a === void 0 ? void 0 : _a.classList.remove('key-active');
         }
         if (id === 'sharp-key') {
             e.currentTarget.classList.remove('sharp-active');

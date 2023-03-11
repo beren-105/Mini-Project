@@ -14,6 +14,13 @@ body {
     margin: 0px auto;
 }
 
+.btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.2s;
+    background-color: transparent;
+}
 
 /* 타이틀 */
 
@@ -33,21 +40,18 @@ body {
 /* 연주버튼 */
 
 .sheet {
-    text-align: right;
     margin-bottom: 30px;
 }
 
-.sheet button.btn {
-    padding: 5px 10px;
+.sheet .tap button.btn {
     margin-left: 10px;
     margin-bottom: 10px;
-    background-color: transparent;
     border: 2px solid #20262E;
-    border-radius: 5px;
-    transition: 0.2s;
 }
 
-.sheet button.btn:hover, .sheet .btn-active:hover {
+.sheet .tap {text-align: right;}
+
+.sheet .tap button.btn:hover, .sheet .tap button.btn-active {
     background-color: #20262E;
     color: #fff;
 } 
@@ -55,25 +59,50 @@ body {
 
 /* 악보연주 */
 
-.sheet-music {
+.select {
     width: 768px;
     margin: 0px auto 20px auto;
-    text-align: left;
+}
+
+.select button.select-btn {
+    border: none;
+    color: #FFB84C;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.select button.select-btn:hover, .select button.select-active {
+    color: #fff;
+    background-color: #FFB84C;
+}
+
+.sheet-music {
+    width: 768px;
+    margin: 0px auto 30px auto;
 }
 
 .score span.score-title {margin-left: 10px;}
+
+.score button.reset {
+    border: 2px solid #EB455F;
+    color: #EB455F;
+}
+
+.score button.reset:hover {
+    color: #fff;
+    background-color: #EB455F;
+}
 
 .music .music-title {text-align: center;}
 
 .music img {width: 768px;}
 
-.music .music-start {display: flex;}
 
 .music .syllableNames {
-    margin-left: 45px;
+    text-align: center;
 }
 .music .syllableNames span {
-    padding-left: 26px;
+    padding: 0px 10px;
     font-weight: bold;
 }
 
@@ -81,12 +110,14 @@ body {
     color: red;
 }
 
+
 /* 피아노 */
 
 .piano {
     background-color: #ddd;
     position: relative;
     overflow: hidden;
+    margin-bottom: 100px;
 }
 
 
@@ -215,3 +246,6 @@ body {
     margin-right: 20px;
     width: 48px;
 }
+
+
+.hidden {display: none;}
