@@ -1,4 +1,5 @@
 import { musics } from './pianoItems.js';
+export let isMusic = 'Twinkle Twinkle Little Star';
 const freePlay = document.querySelector('.free-play');
 const sheetPlay = document.querySelector('.sheet-play');
 const select = document.querySelector('.select');
@@ -44,6 +45,9 @@ function sheetSetting() {
             }
         });
     }
+    const btn = document.querySelector(`button[data-music-name = "Twinkle Twinkle Little Star"]`);
+    if (btn instanceof HTMLButtonElement)
+        btn.click();
 }
 function handleTapBtn(e) {
     if (e.target === freePlay) {
@@ -74,6 +78,7 @@ function handleSelectBtn(e) {
         if (e.target instanceof HTMLButtonElement) {
             const btnName = e.target.getAttribute('data-music-name');
             const divName = document.querySelector(`div[data-name = "${btnName}"]`);
+            isMusic = `${btnName}`;
             divName === null || divName === void 0 ? void 0 : divName.classList.remove('hidden');
             e.target.classList.add('select-active');
         }

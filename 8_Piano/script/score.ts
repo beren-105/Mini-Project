@@ -6,14 +6,28 @@ export let littleStarScore = 100
 
 let arrIndex = 0
 let right:string[] = [];
+let data = littleStar;
 
 export class Score {
     key :string
-    constructor(key :string) {
+    isMusic :string
+    
+    constructor(key :string, isMusic:string) {
         this.key = key;
+        this.isMusic = isMusic;
     }
 
+
+    dataUpdate() {
+        if (this.isMusic === 'Twinkle Twinkle Little Star') {
+            data = littleStar
+        } else {
+            data = happyBirthdey
+        }
+    }
     littleStar() {
+        this.dataUpdate()
+        console.log(data)
 
         const keys = document.querySelectorAll('.key');
         const musicDiv = document.querySelector('div[data-name="Twinkle Twinkle Little Star"]');

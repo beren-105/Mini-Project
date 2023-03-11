@@ -1,14 +1,26 @@
 import { whiteKeys, blackKeys } from './pianoItems.js';
-import { littleStar } from './pianoItems.js';
+import { littleStar, happyBirthdey } from './pianoItems.js';
 export let littleStarIndex = 0;
 export let littleStarScore = 100;
 let arrIndex = 0;
 let right = [];
+let data = littleStar;
 export class Score {
-    constructor(key) {
+    constructor(key, isMusic) {
         this.key = key;
+        this.isMusic = isMusic;
+    }
+    dataUpdate() {
+        if (this.isMusic === 'Twinkle Twinkle Little Star') {
+            data = littleStar;
+        }
+        else {
+            data = happyBirthdey;
+        }
     }
     littleStar() {
+        this.dataUpdate();
+        console.log(data);
         const keys = document.querySelectorAll('.key');
         const musicDiv = document.querySelector('div[data-name="Twinkle Twinkle Little Star"]');
         const findWhiteKeys = whiteKeys.find((whiteKey) => whiteKey.keyboard === this.key);
