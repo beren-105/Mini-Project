@@ -214,7 +214,7 @@ export const blackKeys = [
 ]
 
 
-const littleStar = [
+export const littleStar = [
     {
         name: 'Twinkle Twinkle Little Star',
         page: 1,
@@ -235,7 +235,7 @@ const littleStar = [
     },
 ]
 
-const happyBirthdey = [
+export const happyBirthdey = [
     {
         name: 'Happy Birthday To You',
         page: 1,

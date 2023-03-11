@@ -210,7 +210,7 @@ export const blackKeys = [
         syllableName: '레♭'
     },
 ];
-const littleStar = [
+export const littleStar = [
     {
         name: 'Twinkle Twinkle Little Star',
         page: 1,
@@ -230,7 +230,7 @@ const littleStar = [
         syllableNames: ['도', '도', '솔', '솔', '라', '라', '솔', '파', '파', '미', '미', '레', '레', '도']
     },
 ];
-const happyBirthdey = [
+export const happyBirthdey = [
     {
         name: 'Happy Birthday To You',
         page: 1,

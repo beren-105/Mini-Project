@@ -110,6 +110,8 @@ function handleKeyDowm(e:KeyboardEvent):void {
             const keyboard = key.getAttribute('data-keyboard');
 
             if (e.code === keyboard && !e.repeat) {
+                const score = new Score(e.code);
+                score.littleStar()
 
                 const keyData = whiteKeys.find(whiteKey => whiteKey.keyboard === e.code);
                 const audio = new Audio(keyData?.src);
@@ -124,7 +126,9 @@ function handleKeyDowm(e:KeyboardEvent):void {
             const keyboard = key.getAttribute('data-keyboard');
 
             if (e.code === keyboard && !e.repeat) {
-
+                const score = new Score(e.code);
+                score.littleStar()
+                
                 const keyData = blackKeys.find(blackKey => blackKey.keyboard === e.code);
                 const audio = new Audio(keyData?.src);
                 audio.play();
