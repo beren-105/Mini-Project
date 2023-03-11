@@ -1,5 +1,6 @@
 
 * {
+    font-family: 'Noto Sans KR', sans-serif;
     box-sizing: border-box;
 }
 
@@ -10,8 +11,77 @@ body {
 
 .main {
     width: 1020px;
-    margin: 0 auto;
+    margin: 0px auto;
 }
+
+
+/* 타이틀 */
+
+.title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.title h1.title-name {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.title p {margin: 7px;}
+
+
+/* 연주버튼 */
+
+.sheet {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.sheet button.btn {
+    padding: 5px 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: 2px solid #20262E;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.sheet button.btn:hover, .sheet .btn-active:hover {
+    background-color: #20262E;
+    color: #fff;
+} 
+
+
+/* 악보연주 */
+
+.sheet-music {
+    width: 768px;
+    margin: 0px auto 20px auto;
+    text-align: left;
+}
+
+.score span.score-title {margin-left: 10px;}
+
+.music .music-title {text-align: center;}
+
+.music img {width: 768px;}
+
+.music .music-start {display: flex;}
+
+.music .syllableNames {
+    margin-left: 45px;
+}
+.music .syllableNames span {
+    padding-left: 26px;
+    font-weight: bold;
+}
+
+.music .syllableNames span.span-active {
+    color: red;
+}
+
+/* 피아노 */
 
 .piano {
     background-color: #ddd;
@@ -19,11 +89,12 @@ body {
     overflow: hidden;
 }
 
+
+/* 흰 건반 */
+
 .keys {
     display: flex;
 }
-
-/* 흰 건반 */
 
 .keys .key {
     border: none;
@@ -53,24 +124,6 @@ body {
     transition: 0.05s;
 }
 
-.keys .key .key-ative {
-    position: relative;
-    background: linear-gradient(to right , #a5a5a5, #ddd 15%, #ddd 85%, #a5a5a5);
-    height: 95%;
-    box-shadow: 0px 3px 3px #dfdfdf;
-}
-
-.keys .key .key-ative::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    content: '';
-    display: block;
-    background: linear-gradient(to bottom , rgb(130, 130, 130, 50), transparent);
-}
-
 .keys .key .key-top span.key-vaule {
     width: 100%;
     text-align: center;
@@ -84,6 +137,25 @@ body {
 .keys .key .key-bottom {
     height: 10%;
     background: linear-gradient(to bottom , #535353 20%, #858585, #c9c9c9);
+}
+
+/* 건반을 눌렀을 시 */
+.keys .key .key-active {
+    position: relative;
+    background: linear-gradient(to right , #a5a5a5, #ddd 15%, #ddd 85%, #a5a5a5);
+    height: 95%;
+    box-shadow: 0px 3px 3px #dfdfdf;
+}
+
+.keys .key .key-active::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: '';
+    display: block;
+    background: linear-gradient(to bottom , rgb(130, 130, 130, 50), transparent);
 }
 
 
@@ -132,6 +204,7 @@ body {
 }
 
 
+/* 건반을 눌렀을 시 */
 .sharp .sharp-active {
     height: 170px;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.7);
