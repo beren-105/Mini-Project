@@ -8,9 +8,9 @@ let arrIndex = 0;
 let right:string[] = [];
 
 export class Score {
-    key? :string
+    key :string
     
-    constructor(key? :string) {
+    constructor(key :string) {
         this.key = key;
     }
 
@@ -29,11 +29,12 @@ export class Score {
             if (!sheet.classList.value.includes('hidden')) {
 
                 if(littleStar[index].syllableNames[arrIndex] === (findWhiteKeys?.syllableName || findBlackKeys?.syllableName)) {
+
                     right.push(littleStar[index].syllableNames[arrIndex]);
                     keys[arrIndex].classList.add('red');
                     arrIndex++;
                     score += 20;
-                    console.log(score)
+
                 } else {
                     score -=10;
                 }
@@ -72,6 +73,9 @@ export class Score {
             })
         }
     }
+}
+
+export class Reset {
 
     reset() {
         index = 0;
@@ -92,6 +96,7 @@ export class Score {
 
             keys.forEach((key, i) => {
                 if (key instanceof HTMLSpanElement) {
+                    key.classList.remove('red');
                     key.innerText = `${littleStar[index].syllableNames[i]}`
                 }
             })

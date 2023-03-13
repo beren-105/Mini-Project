@@ -1,5 +1,5 @@
-
 import { littleStar } from './pianoItems.js';
+import { Reset } from './score.js';
 
 const freePlay  = document.querySelector('.free-play');
 const sheetPlay  = document.querySelector('.sheet-play');
@@ -35,6 +35,11 @@ function sheetSetting() {
         `)
         
     }
+
+    const reset = document.querySelector('.reset')
+    if (reset instanceof HTMLButtonElement) {
+        reset.addEventListener('click', handleResetBtn);
+    }
 }
 
 function handleTapBtn(e:MouseEvent):void {
@@ -51,27 +56,8 @@ function handleTapBtn(e:MouseEvent):void {
 
 }
 
-function handleSelectBtn(e:MouseEvent):void {
-    const btns = document.querySelectorAll('.select-btn');
-    const musicDiv = document.querySelectorAll('.musicDiv');
-
-    btns.forEach((btn) => {
-        if (btn instanceof HTMLButtonElement) {
-            btn.classList.remove('select-active');
-        }
-    })
-
-    musicDiv.forEach((musicDiv) => {
-        if (musicDiv instanceof HTMLDivElement) {
-            musicDiv.classList.add('hidden')
-        }
-
-        if (e.target instanceof HTMLButtonElement) {
-            const btnName = e.target.getAttribute('data-music-name');
-            const divName = document.querySelector(`div[data-name = "${btnName}"]`);
-            divName?.classList.remove('hidden')
-            e.target.classList.add('select-active');
-        }
-    })
-    
+function handleResetBtn () {
+    const reset = new Reset();
+    reset.reset()
 }
+

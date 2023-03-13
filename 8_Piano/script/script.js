@@ -133,13 +133,17 @@ function handleMouseDown(e) {
     if (e.currentTarget instanceof HTMLButtonElement) {
         const id = e.currentTarget.getAttribute('id');
         const keyboard = e.currentTarget.getAttribute('data-keyboard');
-        if (id === 'key') {
+        if (id === 'key' && keyboard) {
+            const score = new Score(keyboard);
+            score.littleStar();
             const keyData = whiteKeys.find(whiteKey => whiteKey.keyboard === keyboard);
             const audio = new Audio(keyData === null || keyData === void 0 ? void 0 : keyData.src);
             audio.play();
             (_a = e.currentTarget.firstElementChild) === null || _a === void 0 ? void 0 : _a.classList.add('key-active');
         }
-        if (id === 'sharp-key') {
+        if (id === 'sharp-key' && keyboard) {
+            const score = new Score(keyboard);
+            score.littleStar();
             const keyData = blackKeys.find(blackKey => blackKey.keyboard === keyboard);
             const audio = new Audio(keyData === null || keyData === void 0 ? void 0 : keyData.src);
             audio.play();

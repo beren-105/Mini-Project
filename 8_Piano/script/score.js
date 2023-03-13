@@ -22,7 +22,6 @@ export class Score {
                     keys[arrIndex].classList.add('red');
                     arrIndex++;
                     score += 20;
-                    console.log(score);
                 }
                 else {
                     score -= 10;
@@ -57,6 +56,8 @@ export class Score {
             });
         }
     }
+}
+export class Reset {
     reset() {
         index = 0;
         score = 100;
@@ -73,6 +74,7 @@ export class Score {
             }
             keys.forEach((key, i) => {
                 if (key instanceof HTMLSpanElement) {
+                    key.classList.remove('red');
                     key.innerText = `${littleStar[index].syllableNames[i]}`;
                 }
             });
