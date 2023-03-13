@@ -13,43 +13,53 @@ https://beren-105.tistory.com/category/mini%20project
     <li>
         <a href="https://codepen.io/beren-105/pen/BaPRYxb" style="text-decoration: none; color: #000;">
             To do List
-            <span style="color: #aaa;"> [바닐라JS]</span>
         </a>
+        <span style="color: #aaa;"> [바닐라JS]</span>
     </li>
     <li>
         <a href="https://codepen.io/beren-105/pen/wvxrNWe" style="text-decoration: none; color: #000;">
             Stop watch & Timer
-            <span style="color: #aaa;"> [바닐라JS]</span>
         </a>
+        <span style="color: #aaa;"> [바닐라JS]</span>
     </li>
     <li>
         <a href="https://codepen.io/beren-105/pen/OJwErOj" style="text-decoration: none; color: #000;">
             calculator
-            <span style="color: #aaa;"> [바닐라JS]</span>
         </a>
+        <span style="color: #aaa;"> [바닐라JS]</span>
     </li>
     <li>
         <a href="https://codepen.io/beren-105/pen/WNKmKvj" style="text-decoration: none; color: #000;">
             navigation
-            <span style="color: #aaa;"> [바닐라JS]</span>
         </a>
+        <span style="color: #aaa;"> [바닐라JS]</span>
     </li>
     <li>
         <a href="" style="text-decoration: none; color: #000;">
             Memory game
-            <span style="color: #aaa;"> [바닐라JS]</span>
         </a>
+        <span style="color: #aaa;"> [바닐라JS]</span>
     </li>
     <li>
         <a href="https://codepen.io/beren-105/pen/eYLOMOY" style="text-decoration: none; color: #000;">
             Calculator
-            <span style="color: #aaa;"> [타입스크립트]</span>
         </a>
+        <span style="color: #aaa;"> [타입스크립트]</span>
     </li>
     <li>
         <a href="https://codepen.io/beren-105/pen/MWqYgVB" style="text-decoration: none; color: #000;">
             Whack a mole
-            <span style="color: #aaa;"> [바닐라JS]</span>
         </a>
+        <span style="color: #aaa;"> [바닐라JS]</span>
+    </li>
+    <li>
+        <a href="https://palying-piano.netlify.app/" style="text-decoration: none; color: #000;">
+            Piano
+        </a>
+        <span style="color: #aaa;"> [타입스크립트]</span>
+        <ul>
+            <li>피아노 mp3 : Copyright 2017 Nicholas Smith </li>
+            <li>작은별 악보 : https://mcurio.tistory.com/14</li>
+        </ul>
     </li>
 </ol>
