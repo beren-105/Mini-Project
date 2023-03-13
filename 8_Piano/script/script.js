@@ -1,6 +1,5 @@
 import { whiteKeys, blackKeys } from './pianoItems.js';
 import { Score } from './score.js';
-import { isMusic } from './sheet.js';
 document.addEventListener('DOMContentLoaded', pianoSetting);
 function pianoSetting() {
     const keys = document.querySelector('.keys');
@@ -85,7 +84,7 @@ function handleKeyDowm(e) {
         if (key instanceof HTMLButtonElement) {
             const keyboard = key.getAttribute('data-keyboard');
             if (e.code === keyboard && !e.repeat) {
-                const score = new Score(e.code, isMusic);
+                const score = new Score(e.code);
                 score.littleStar();
                 const keyData = whiteKeys.find(whiteKey => whiteKey.keyboard === e.code);
                 const audio = new Audio(keyData === null || keyData === void 0 ? void 0 : keyData.src);
@@ -98,7 +97,7 @@ function handleKeyDowm(e) {
         if (key instanceof HTMLButtonElement) {
             const keyboard = key.getAttribute('data-keyboard');
             if (e.code === keyboard && !e.repeat) {
-                const score = new Score(e.code, isMusic);
+                const score = new Score(e.code);
                 score.littleStar();
                 const keyData = blackKeys.find(blackKey => blackKey.keyboard === e.code);
                 const audio = new Audio(keyData === null || keyData === void 0 ? void 0 : keyData.src);

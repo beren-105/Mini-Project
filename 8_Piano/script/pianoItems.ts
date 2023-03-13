@@ -234,20 +234,3 @@ export const littleStar = [
         syllableNames: ['도', '도', '솔', '솔', '라', '라', '솔', '파', '파', '미', '미', '레', '레', '도']
     },
 ]
-
-export const happyBirthdey = [
-    {
-        name: 'Happy Birthday To You',
-        page: 1,
-        src: './img/happy-birthdey-1.jpg',
-        syllableNames: ['도', '도', '레', '도', '파', '미', '도', '도', '레', '도', '솔', '파', '도', '도']
-    },
-    {
-        name: 'Happy Birthday To You',
-        page: 2,
-        src: './img/happy-birthdey-2.jpg',
-        syllableNames: ['도', '라', '파', '미', '레', '시♭', '시♭', '라', '파', '솔', '파']
-    },
-]
-
-export const musics = [littleStar, happyBirthdey]
