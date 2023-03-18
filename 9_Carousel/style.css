@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+.content {
+    max-width: 768px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.carousel {
+    position: relative;
+}
+
+.btn button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn .prev-btn {
+    left: -2rem;
+}
+
+.btn .next-btn {
+    right: -2rem;
+}
+
+.imgs {
+    display: flex;
+    width: initial;
+    overflow: hidden;
+}
+
+.imgs .img {
+    width: 200px;
+    padding-right: 1rem;
+}
