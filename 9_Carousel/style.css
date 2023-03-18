@@ -30,10 +30,15 @@
     right: -2rem;
 }
 
-.imgs {
-    display: flex;
+.slide {
     width: initial;
     overflow: hidden;
+}
+
+.imgs {
+    display: flex;
+    transition: 0.4s;
+    transform: translateX(-200px);
 }
 
 .imgs .img {
