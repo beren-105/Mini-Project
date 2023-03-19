@@ -3,7 +3,7 @@
 }
 
 .content {
-    max-width: 768px;
+    max-width: 600px;
     margin: 0 auto;
     text-align: center;
 }
@@ -37,8 +37,6 @@
 
 .imgs {
     display: flex;
-    transition: 0.4s;
-    transform: translateX(-200px);
 }
 
 .imgs .img {

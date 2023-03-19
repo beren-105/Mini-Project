@@ -10,14 +10,16 @@ let index = 0;
 (function cloneSlide() {
     // 타입 어설션(type assertion)를 통한 강제 타입 교체
     // cloneNode : 복제된 node를 반환한다. 사용법 -> 기존노드.cloneNode(복제할노드)
-    const firstImgClone = imgs[index].cloneNode(true) as HTMLImageElement;
-    const lastImgClone = imgs[imgs.length-(index+1)].cloneNode(true) as HTMLImageElement;
+    const firstImgClone = imgs[0].cloneNode(true) as HTMLImageElement;
+    const lastImgClone = imgs[imgs.length-1].cloneNode(true) as HTMLImageElement;
     firstImgClone.setAttribute('id', 'firstImg');
     lastImgClone.setAttribute('id', 'lastImg');
     
     if (slide instanceof HTMLDivElement) {
         slide.appendChild(firstImgClone);
         slide.prepend(lastImgClone);
+        slide.style.transform = `translateX(-${size}px)`
+        slide.style.transition = '0.4s';
     }
 })();
 
@@ -25,21 +27,35 @@ let index = 0;
 setInterval(autoSlide, 1000);
 
 function autoSlide() {
-    // cloneSlide()
 
     index++;
 
-    if (index === imgs.length) {
-        index = 0;
-    }
     if (slide instanceof HTMLDivElement) {
-        if (index > 0) {
+        slide.style.transition = '0.4s';
+        slide.style.transform = `translateX(-${index * size}px)`;
+    }
+
+    // console.log(index)
+    
+}
+
+
+slide?.addEventListener('transitionend', moveSlide);
+function moveSlide() {
+
+    if (slide instanceof HTMLDivElement) {
+        // if (imgs[index].id === 'lastImg') {
+        //     console.log('b');
+        //     slide.style.transition = 'none';
+        //     index = 0;
+        //     slide.style.transform = `translateX(-${index * size}px)`
+        // }
+        if (index === imgs.length) {
+            console.log('a')
+            slide.style.transition = 'none';
+            index = 0;
             slide.style.transform = `translateX(-${index * size}px)`
         }
-        if (index === imgs.length - 1) {
-            slide.style.transform = `translateX(-${index * size}px)`
-        }  
     }
-    
 }
 
