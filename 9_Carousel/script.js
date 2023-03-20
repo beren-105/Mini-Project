@@ -46,22 +46,14 @@ function nextSlide() {
         slide.style.transition = '0.4s';
         slide.style.transform = `translateX(-${index * size + startPosition}px)`;
     }
-    if (index === imgs.length) {
-        index = 0;
-    }
-    ;
-    dotBtnActive();
 }
 // 이전으로 넘어갈 때
 function prevSlide() {
-    if (index === 0)
-        index = imgs.length;
     if (slide instanceof HTMLDivElement && index >= 0) {
         index--;
         slide.style.transition = '0.4s';
         slide.style.transform = `translateX(-${index * size + startPosition}px)`;
     }
-    dotBtnActive();
 }
 // 무한으로 이어지는 것처럼 보이게 하게
 function resetSlide() {
@@ -77,6 +69,7 @@ function resetSlide() {
             slide.style.transform = `translateX(-${index * size + startPosition}px)`;
         }
     }
+    dotBtnActive();
 }
 // 마우스 이벤트
 function handleMouseOver(e) {
@@ -125,8 +118,6 @@ function dotBtnActive() {
                 && Number(btn.dataset.id) === index) {
                 index = Number(btn.dataset.id);
                 btn.classList.add('active');
-                slide.style.transition = '0.4s';
-                slide.style.transform = `translateX(-${index * size + startPosition}px)`;
             }
         }
     });

@@ -58,23 +58,17 @@ function nextSlide() {
         slide.style.transition = '0.4s';
         slide.style.transform = `translateX(-${index * size + startPosition}px)`;
     }
-    
-    if (index === imgs.length) {index = 0};
-    dotBtnActive()
 }
 
 
 // 이전으로 넘어갈 때
 function prevSlide() {
-    if (index === 0) index = imgs.length;
-
     if (slide instanceof HTMLDivElement && index >= 0) {
         index--;
 
         slide.style.transition = '0.4s';
         slide.style.transform = `translateX(-${index * size + startPosition}px)`;
     }
-    dotBtnActive()
 }
 
 
@@ -94,6 +88,8 @@ function resetSlide() {
             slide.style.transform = `translateX(-${index * size + startPosition}px)`
         }
     }
+    
+    dotBtnActive()
 }
 
 
@@ -155,8 +151,6 @@ function dotBtnActive() {
                 ) {
                 index = Number(btn.dataset.id);
                 btn.classList.add('active');
-                slide.style.transition = '0.4s';
-                slide.style.transform = `translateX(-${index * size + startPosition}px)`;
             }
         }
     })
