@@ -8,6 +8,35 @@ const size = imgs[0].clientWidth;
 const startPosition = size * imgs.length;
 let index = 0;
 let autoSlide;
+document.addEventListener('DOMContentLoaded', createBtn);
+function createBtn() {
+    const slideBtns = document.querySelector('.slide-btns');
+    for (let i = 0; i < imgs.length; i++) {
+        const btn = document.createElement('button');
+        btn.classList.add('slide-btn');
+        btn.setAttribute('data-id', `${i}`);
+        if (slideBtns instanceof HTMLDivElement) {
+            slideBtns.appendChild(btn);
+        }
+        btn.addEventListener('click', dotBtnActive);
+    }
+}
+function dotBtnActive({ target }) {
+    const slideBtns = document.querySelectorAll('.slide-btn');
+    slideBtns.forEach((btn) => {
+        if (btn instanceof HTMLButtonElement) {
+            btn.classList.remove('active');
+            if (slide instanceof HTMLDivElement && target) {
+                const targetBtn = target;
+                index = Number(targetBtn.dataset.id);
+                targetBtn.classList.add('active');
+                slide.style.transition = '0.4s';
+                slide.style.transform = `translateX(-${index * size + startPosition}px)`;
+            }
+        }
+    });
+    console.log(index);
+}
 (function cloneSlide() {
     // 타입 어설션(type assertion)를 통한 강제 타입 교체
     // cloneNode : 복제된 node를 반환한다. 사용법 -> 기존노드.cloneNode(복제할노드)
@@ -30,11 +59,11 @@ if (slide instanceof HTMLDivElement
     && prevBtn instanceof HTMLButtonElement
     && nextBtn instanceof HTMLButtonElement) {
     autoSlide = setInterval(nextSlide, 2000);
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
     slide.addEventListener('transitionend', resetSlide);
     carousel.addEventListener('mouseover', handleMouseOver);
     carousel.addEventListener('mouseleave', handleMouseLeave);
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
 }
 function nextSlide() {
     if (slide instanceof HTMLDivElement && index < imgs.length) {
