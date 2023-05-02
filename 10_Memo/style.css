@@ -1,4 +1,11 @@
 
+.title {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    padding-bottom: 0.5rem;
+    margin: 2rem 0;
+}
+
 .container {
     max-width: 768px;
     margin: 0 auto;
@@ -9,19 +16,20 @@
 
 .content {
     flex-basis: 30%;
-    padding: 0.4rem;
+    padding: 1rem 0.4rem;
     border: 1px solid gray;
     border-radius: 5px;
 }
 
 .btns {float: right;}
 
-.btns .article-btn {
+.btns .delete {
     background-color: transparent;
     padding: 0.5rem 0.5rem;
     border-radius: 5px;
-    border: 1px solid gray;
+    border: 1px solid red;
     font-size: 0.7rem;
+    color: red;
 }
 
 .article-content {
@@ -32,7 +40,7 @@
     display: block;
 }
 
-.add {
+.add-btn {
     width: 100%;
     height: 100%;
     border: none;
