@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "noImplicitAny": true, // auy가 의도치 않게 발생한 에러를 띄운다.
+        "strictNullChecks": true // null, undefined 타입에 이상한 조작을 하면 에러를 띄운다.
+    }
+}
