@@ -15,7 +15,7 @@
     <section class="container">
         <article class="content">
             <div class="btns">
-                <button class="delete">Delete</button>
+                <button class="btn delete" type="button">Delete</button>
             </div>
             <textarea name="" id="" cols="30" rows="7" class="article-content">dkdkdkdk</textarea>
         </article>
@@ -40,9 +40,16 @@
         </article>
         
         <article class="content" id="add">
-            <button class="content add-btn">+</button>
+            <button class="content plus-btn" type="button">+</button>
         </article>
     </section>
     
+    <div class="modal hidden">
+        <form class="form" action="">
+            <button class="btn close">X</button>
+            <textarea class="add-content" id="" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
+            <button class="btn add-btn" type="submit">Add</button>
+        </form>
+    </div>
 </body>
 </html>
