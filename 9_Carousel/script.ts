@@ -18,13 +18,13 @@ let autoSlide :number;
     
     if (slide instanceof HTMLDivElement) {
         for (let i = 0; i < imgs.length; i ++) {
-            const imgClone = imgs[i].cloneNode(true) as HTMLImageElement;
+            const imgClone = imgs[i].cloneNode(true) as HTMLDivElement;
             imgClone.setAttribute('id', 'clone')
             slide.appendChild(imgClone);
         }
 
         for (let i = imgs.length - 1; i >= 0 ; i --) {
-            const imgClone = imgs[i].cloneNode(true) as HTMLImageElement;
+            const imgClone = imgs[i].cloneNode(true) as HTMLDivElement;
             imgClone.setAttribute('id', 'clone')
             slide.prepend(imgClone);
         }

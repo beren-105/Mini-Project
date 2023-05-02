@@ -62,4 +62,10 @@ https://beren-105.tistory.com/category/mini%20project
             <li>작은별 악보 : https://mcurio.tistory.com/14</li>
         </ul>
     </li>
+    <li>
+        <a href="https://codepen.io/beren-105/pen/gOddgVR" target="_blank" style="text-decoration: none; color: #000;">
+            Carousel
+        </a>
+        <span style="color: #aaa;"> [타입스크립트]</span>
+    </li>
 </ol>
