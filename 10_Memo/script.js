@@ -22,7 +22,7 @@ function loaded() {
     if (contents instanceof HTMLElement) {
         memos.forEach((memo) => {
             const article = document.createElement('article');
-            article.classList.add('content');
+            article.classList.add('content', 'list');
             article.setAttribute('id', `${memo.id}`);
             article.innerHTML = `
                 <div class="btns">
@@ -59,13 +59,29 @@ if (form instanceof HTMLFormElement) {
     form.addEventListener('submit', (e) => handleSubmit(e));
     function handleSubmit(e) {
         e.preventDefault();
+        const contents = document.querySelector('.contents');
         const addContent = document.querySelector('.add-content');
+        const list = document.querySelectorAll('.list');
+        const lastList = list[list.length - 1];
+        const id = Math.floor(Math.random() * 10000);
         if (addContent instanceof HTMLTextAreaElement) {
-            memos = [...memos, { content: addContent.value, id: Math.floor(Math.random() * 10000) }];
-            addContent.value = '';
+            memos = [...memos, { content: addContent.value, id: id }];
             if (closeBtn instanceof HTMLButtonElement) {
                 closeBtn.click();
             }
+            if (contents instanceof HTMLElement) {
+                const article = document.createElement('article');
+                article.classList.add('content', 'list');
+                article.setAttribute('id', `${id}`);
+                article.innerHTML = `
+                    <div class="btns">
+                        <button class="btn delete" type="button">Delete</button>
+                    </div>
+                    <textarea name="" id="" cols="30" rows="7" class="article-content">${addContent.value}</textarea>
+                    `;
+                contents.insertBefore(article, lastList.nextSibling);
+            }
+            addContent.value = '';
         }
     }
 }
