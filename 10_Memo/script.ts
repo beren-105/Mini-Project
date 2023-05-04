@@ -31,15 +31,24 @@ function loaded() {
             article.setAttribute('id', `${memo.id}`);
             article.innerHTML = `
                 <div class="btns">
-                    <button class="btn delete" type="button">Delete</button>
+                    <button class="btn delete" type="button" data-id=${memo.id}>Delete</button>
                 </div>
                 <textarea name="" id="" cols="30" rows="7" class="article-content">${memo.content}</textarea>
                 `;
             contents.prepend(article);
         });
-
     }
+
+    const deleteBtns = document.querySelectorAll('.delete');
+    
+    deleteBtns.forEach(deleteBtn => {
+        if (deleteBtn instanceof HTMLButtonElement) {
+            deleteBtn.addEventListener('click',(e) => handleDelete(e));
+        }
+
+    });
 }
+
 
 // 모달 열기
 if (plusBtn instanceof HTMLButtonElement) {
@@ -81,29 +90,57 @@ if (form instanceof HTMLFormElement) {
         const id = Math.floor(Math.random()*10000);
 
         if (addContent instanceof HTMLTextAreaElement) {
+            // 메모 리스트 추가
             memos = [...memos, {content: addContent.value, id:id}];
 
-            if (closeBtn instanceof HTMLButtonElement) {
-                closeBtn.click();
-            }
+            // 새 article 만들기
             if (contents instanceof HTMLElement) {
                 
                 const article = document.createElement('article');
+                const btnDiv = document.createElement('div');
+                const btn = document.createElement('button');
+
                 article.classList.add('content', 'list');
                 article.setAttribute('id', `${id}`);
                 article.innerHTML = `
-                    <div class="btns">
-                        <button class="btn delete" type="button">Delete</button>
-                    </div>
                     <textarea name="" id="" cols="30" rows="7" class="article-content">${addContent.value}</textarea>
                     `;
+                
+                btnDiv.classList.add('btns');
+
+                btn.classList.add('btn', 'delete');
+                btn.setAttribute('data-id', `${id}`);
+                btn.innerText ='Delete';
+
                 contents.insertBefore(article, lastList.nextSibling);
+                article.prepend(btnDiv);
+                btnDiv.appendChild(btn);
+
+                btn.addEventListener('click', (e) => handleDelete(e));
+            }
+            
+            // 모달창 제거
+            if (closeBtn instanceof HTMLButtonElement) {
+                closeBtn.click();
             }
 
-            
             addContent.value = '';
         }
+    }
+}
 
 
+function handleDelete(e :MouseEvent) {
+    if (e.currentTarget instanceof HTMLButtonElement) {
+        const btnId = e.currentTarget.dataset.id;
+
+        if (btnId) {
+            const updateMemo = memos.filter(memo => memo.id !== Number(btnId));
+            memos = updateMemo;
+
+            document.getElementById(btnId)?.remove();
+        }
+
+        console.log(memos)
     }
 }
